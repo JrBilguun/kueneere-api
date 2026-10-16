@@ -1,0 +1,2791 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AddLookToCartInput {
+  cartToken: String
+  items: [AddLookToCartItemInput!]!
+  lookId: Int!
+}
+
+input AddLookToCartItemInput {
+  productId: Int!
+  variantId: Int
+}
+
+input AddToCartInput {
+  """Зочин сагсны token (нэвтрээгүй үед)"""
+  cartToken: String
+  productId: Int!
+  quantity: Int! = 1
+
+  """Хэмжээ/өнгөний variant"""
+  variantId: Int
+}
+
+enum AssetSize {
+  LARGE
+  MEDIUM
+  SMALL
+}
+
+input AssetSizeFilterComparison {
+  eq: AssetSize
+  gt: AssetSize
+  gte: AssetSize
+  iLike: AssetSize
+  in: [AssetSize!]
+  is: Boolean
+  isNot: Boolean
+  like: AssetSize
+  lt: AssetSize
+  lte: AssetSize
+  neq: AssetSize
+  notILike: AssetSize
+  notIn: [AssetSize!]
+  notLike: AssetSize
+}
+
+enum AssetType {
+  IMAGE
+  VIDEO
+}
+
+input AssetTypeFilterComparison {
+  eq: AssetType
+  gt: AssetType
+  gte: AssetType
+  iLike: AssetType
+  in: [AssetType!]
+  is: Boolean
+  isNot: Boolean
+  like: AssetType
+  lt: AssetType
+  lte: AssetType
+  neq: AssetType
+  notILike: AssetType
+  notIn: [AssetType!]
+  notLike: AssetType
+}
+
+type AudienceSegment {
+  createdAt: DateTime!
+  description: String
+  engagement: Float!
+  engagementLevel: String!
+  growth: Float!
+  id: ID!
+  ltv: Float!
+  name: String!
+  size: Int!
+  updatedAt: DateTime!
+}
+
+type AudienceSegmentConnection {
+  """Array of nodes."""
+  nodes: [AudienceSegment!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+input AudienceSegmentDeleteFilter {
+  and: [AudienceSegmentDeleteFilter!]
+  createdAt: DateFieldComparison
+  engagement: FloatFieldComparison
+  engagementLevel: StringFieldComparison
+  growth: FloatFieldComparison
+  id: IDFilterComparison
+  ltv: FloatFieldComparison
+  name: StringFieldComparison
+  or: [AudienceSegmentDeleteFilter!]
+  size: IntFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+type AudienceSegmentDeleteResponse {
+  createdAt: DateTime
+  description: String
+  engagement: Float
+  engagementLevel: String
+  growth: Float
+  id: ID
+  ltv: Float
+  name: String
+  size: Int
+  updatedAt: DateTime
+}
+
+input AudienceSegmentFilter {
+  and: [AudienceSegmentFilter!]
+  createdAt: DateFieldComparison
+  engagement: FloatFieldComparison
+  engagementLevel: StringFieldComparison
+  growth: FloatFieldComparison
+  id: IDFilterComparison
+  ltv: FloatFieldComparison
+  name: StringFieldComparison
+  or: [AudienceSegmentFilter!]
+  size: IntFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+input AudienceSegmentSort {
+  direction: SortDirection!
+  field: AudienceSegmentSortFields!
+  nulls: SortNulls
+}
+
+enum AudienceSegmentSortFields {
+  createdAt
+  engagement
+  engagementLevel
+  growth
+  id
+  ltv
+  name
+  size
+  updatedAt
+}
+
+input AudienceSegmentUpdateFilter {
+  and: [AudienceSegmentUpdateFilter!]
+  createdAt: DateFieldComparison
+  engagement: FloatFieldComparison
+  engagementLevel: StringFieldComparison
+  growth: FloatFieldComparison
+  id: IDFilterComparison
+  ltv: FloatFieldComparison
+  name: StringFieldComparison
+  or: [AudienceSegmentUpdateFilter!]
+  size: IntFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+type AuthPayload {
+  accessToken: String!
+  expiresIn: Int!
+  refreshToken: String!
+  user: User!
+}
+
+input BooleanFieldComparison {
+  is: Boolean
+  isNot: Boolean
+}
+
+type BudgetOverview {
+  channels: [ChannelBudget!]!
+  recentTransactions: [BudgetTransaction!]!
+  remaining: Float!
+  settings: BudgetSettings!
+  totalSpent: Float!
+  utilization: Float!
+}
+
+type BudgetSettings {
+  currency: String!
+  dailyBudget: Float!
+  id: Int!
+  totalBudget: Float!
+  updatedAt: DateTime!
+}
+
+type BudgetTransaction {
+  amount: Float!
+  campaignId: Int
+  channel: String
+  createdAt: DateTime!
+  description: String!
+  id: ID!
+  occurredAt: DateTime!
+}
+
+type BudgetTransactionConnection {
+  """Array of nodes."""
+  nodes: [BudgetTransaction!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type BudgetTransactionDeleteResponse {
+  amount: Float
+  campaignId: Int
+  channel: String
+  createdAt: DateTime
+  description: String
+  id: ID
+  occurredAt: DateTime
+}
+
+input BudgetTransactionFilter {
+  amount: FloatFieldComparison
+  and: [BudgetTransactionFilter!]
+  campaignId: IntFieldComparison
+  channel: StringFieldComparison
+  createdAt: DateFieldComparison
+  description: StringFieldComparison
+  id: IDFilterComparison
+  occurredAt: DateFieldComparison
+  or: [BudgetTransactionFilter!]
+}
+
+input BudgetTransactionSort {
+  direction: SortDirection!
+  field: BudgetTransactionSortFields!
+  nulls: SortNulls
+}
+
+enum BudgetTransactionSortFields {
+  amount
+  campaignId
+  channel
+  createdAt
+  description
+  id
+  occurredAt
+}
+
+type Campaign {
+  assets(
+    """Specify to filter the records returned."""
+    filter: CampaignAssetFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [CampaignAssetSort!]! = []
+  ): [CampaignAsset!]!
+  budget: Float!
+  channel: String!
+  clicks: Int!
+  conversions: Int!
+  createdAt: DateTime!
+  description: String
+  endDate: String
+  id: ID!
+  impressions: Float!
+  name: String!
+  progress: Int!
+  revenue: Float!
+  roas: Float!
+  spend: Float!
+  startDate: String
+  status: CampaignStatus!
+  updatedAt: DateTime!
+}
+
+type CampaignAsset {
+  campaign: Campaign
+  campaignId: Int
+  createdAt: DateTime!
+  ctr: Float!
+  engagement: Float!
+  id: ID!
+  impressions: Int!
+  name: String!
+  size: AssetSize!
+  storageKey: String
+  thumbnailUrl: String
+  type: AssetType!
+  updatedAt: DateTime!
+  url: String!
+}
+
+type CampaignAssetConnection {
+  """Array of nodes."""
+  nodes: [CampaignAsset!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+input CampaignAssetDeleteFilter {
+  and: [CampaignAssetDeleteFilter!]
+  campaignId: IntFieldComparison
+  createdAt: DateFieldComparison
+  ctr: FloatFieldComparison
+  engagement: FloatFieldComparison
+  id: IDFilterComparison
+  impressions: IntFieldComparison
+  name: StringFieldComparison
+  or: [CampaignAssetDeleteFilter!]
+  size: AssetSizeFilterComparison
+  type: AssetTypeFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+type CampaignAssetDeleteResponse {
+  campaignId: Int
+  createdAt: DateTime
+  ctr: Float
+  engagement: Float
+  id: ID
+  impressions: Int
+  name: String
+  size: AssetSize
+  storageKey: String
+  thumbnailUrl: String
+  type: AssetType
+  updatedAt: DateTime
+  url: String
+}
+
+input CampaignAssetFilter {
+  and: [CampaignAssetFilter!]
+  campaignId: IntFieldComparison
+  createdAt: DateFieldComparison
+  ctr: FloatFieldComparison
+  engagement: FloatFieldComparison
+  id: IDFilterComparison
+  impressions: IntFieldComparison
+  name: StringFieldComparison
+  or: [CampaignAssetFilter!]
+  size: AssetSizeFilterComparison
+  type: AssetTypeFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+input CampaignAssetSort {
+  direction: SortDirection!
+  field: CampaignAssetSortFields!
+  nulls: SortNulls
+}
+
+enum CampaignAssetSortFields {
+  campaignId
+  createdAt
+  ctr
+  engagement
+  id
+  impressions
+  name
+  size
+  type
+  updatedAt
+}
+
+input CampaignAssetUpdateFilter {
+  and: [CampaignAssetUpdateFilter!]
+  campaignId: IntFieldComparison
+  createdAt: DateFieldComparison
+  ctr: FloatFieldComparison
+  engagement: FloatFieldComparison
+  id: IDFilterComparison
+  impressions: IntFieldComparison
+  name: StringFieldComparison
+  or: [CampaignAssetUpdateFilter!]
+  size: AssetSizeFilterComparison
+  type: AssetTypeFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+type CampaignConnection {
+  """Array of nodes."""
+  nodes: [Campaign!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+input CampaignDeleteFilter {
+  and: [CampaignDeleteFilter!]
+  budget: FloatFieldComparison
+  channel: StringFieldComparison
+  clicks: IntFieldComparison
+  conversions: IntFieldComparison
+  createdAt: DateFieldComparison
+  endDate: StringFieldComparison
+  id: IDFilterComparison
+  impressions: FloatFieldComparison
+  name: StringFieldComparison
+  or: [CampaignDeleteFilter!]
+  revenue: FloatFieldComparison
+  spend: FloatFieldComparison
+  startDate: StringFieldComparison
+  status: CampaignStatusFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+type CampaignDeleteResponse {
+  budget: Float
+  channel: String
+  clicks: Int
+  conversions: Int
+  createdAt: DateTime
+  description: String
+  endDate: String
+  id: ID
+  impressions: Float
+  name: String
+  revenue: Float
+  spend: Float
+  startDate: String
+  status: CampaignStatus
+  updatedAt: DateTime
+}
+
+input CampaignFilter {
+  and: [CampaignFilter!]
+  budget: FloatFieldComparison
+  channel: StringFieldComparison
+  clicks: IntFieldComparison
+  conversions: IntFieldComparison
+  createdAt: DateFieldComparison
+  endDate: StringFieldComparison
+  id: IDFilterComparison
+  impressions: FloatFieldComparison
+  name: StringFieldComparison
+  or: [CampaignFilter!]
+  revenue: FloatFieldComparison
+  spend: FloatFieldComparison
+  startDate: StringFieldComparison
+  status: CampaignStatusFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+input CampaignSort {
+  direction: SortDirection!
+  field: CampaignSortFields!
+  nulls: SortNulls
+}
+
+enum CampaignSortFields {
+  budget
+  channel
+  clicks
+  conversions
+  createdAt
+  endDate
+  id
+  impressions
+  name
+  revenue
+  spend
+  startDate
+  status
+  updatedAt
+}
+
+enum CampaignStatus {
+  ENDED
+  LIVE
+  PAUSED
+  SCHEDULED
+}
+
+input CampaignStatusFilterComparison {
+  eq: CampaignStatus
+  gt: CampaignStatus
+  gte: CampaignStatus
+  iLike: CampaignStatus
+  in: [CampaignStatus!]
+  is: Boolean
+  isNot: Boolean
+  like: CampaignStatus
+  lt: CampaignStatus
+  lte: CampaignStatus
+  neq: CampaignStatus
+  notILike: CampaignStatus
+  notIn: [CampaignStatus!]
+  notLike: CampaignStatus
+}
+
+input CampaignUpdateFilter {
+  and: [CampaignUpdateFilter!]
+  budget: FloatFieldComparison
+  channel: StringFieldComparison
+  clicks: IntFieldComparison
+  conversions: IntFieldComparison
+  createdAt: DateFieldComparison
+  endDate: StringFieldComparison
+  id: IDFilterComparison
+  impressions: FloatFieldComparison
+  name: StringFieldComparison
+  or: [CampaignUpdateFilter!]
+  revenue: FloatFieldComparison
+  spend: FloatFieldComparison
+  startDate: StringFieldComparison
+  status: CampaignStatusFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+type Category {
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  imageUrl: String
+  isActive: Boolean!
+  name: String!
+  parentId: Int
+  position: Int!
+  slug: String!
+  translations: JSON
+  updatedAt: DateTime!
+}
+
+type CategoryConnection {
+  """Array of nodes."""
+  nodes: [Category!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+input CategoryDeleteFilter {
+  and: [CategoryDeleteFilter!]
+  createdAt: DateFieldComparison
+  id: IDFilterComparison
+  isActive: BooleanFieldComparison
+  name: StringFieldComparison
+  or: [CategoryDeleteFilter!]
+  parentId: IntFieldComparison
+  position: IntFieldComparison
+  slug: StringFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+type CategoryDeleteResponse {
+  createdAt: DateTime
+  description: String
+  id: ID
+  imageUrl: String
+  isActive: Boolean
+  name: String
+  parentId: Int
+  position: Int
+  slug: String
+  translations: JSON
+  updatedAt: DateTime
+}
+
+input CategoryFilter {
+  and: [CategoryFilter!]
+  createdAt: DateFieldComparison
+  id: IDFilterComparison
+  isActive: BooleanFieldComparison
+  name: StringFieldComparison
+  or: [CategoryFilter!]
+  parentId: IntFieldComparison
+  position: IntFieldComparison
+  slug: StringFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+input CategorySort {
+  direction: SortDirection!
+  field: CategorySortFields!
+  nulls: SortNulls
+}
+
+enum CategorySortFields {
+  createdAt
+  id
+  isActive
+  name
+  parentId
+  position
+  slug
+  updatedAt
+}
+
+input CategoryUpdateFilter {
+  and: [CategoryUpdateFilter!]
+  createdAt: DateFieldComparison
+  id: IDFilterComparison
+  isActive: BooleanFieldComparison
+  name: StringFieldComparison
+  or: [CategoryUpdateFilter!]
+  parentId: IntFieldComparison
+  position: IntFieldComparison
+  slug: StringFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+input ChangePasswordInput {
+  currentPassword: String!
+  newPassword: String!
+}
+
+type ChannelBudget {
+  allocated: Float!
+  channel: String!
+  id: ID!
+  spent: Float!
+  updatedAt: DateTime!
+}
+
+type ChannelBudgetConnection {
+  """Array of nodes."""
+  nodes: [ChannelBudget!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+input ChannelBudgetDeleteFilter {
+  allocated: FloatFieldComparison
+  and: [ChannelBudgetDeleteFilter!]
+  channel: StringFieldComparison
+  id: IDFilterComparison
+  or: [ChannelBudgetDeleteFilter!]
+  spent: FloatFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+type ChannelBudgetDeleteResponse {
+  allocated: Float
+  channel: String
+  id: ID
+  spent: Float
+  updatedAt: DateTime
+}
+
+input ChannelBudgetFilter {
+  allocated: FloatFieldComparison
+  and: [ChannelBudgetFilter!]
+  channel: StringFieldComparison
+  id: IDFilterComparison
+  or: [ChannelBudgetFilter!]
+  spent: FloatFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+input ChannelBudgetSort {
+  direction: SortDirection!
+  field: ChannelBudgetSortFields!
+  nulls: SortNulls
+}
+
+enum ChannelBudgetSortFields {
+  allocated
+  channel
+  id
+  spent
+  updatedAt
+}
+
+input ChannelBudgetUpdateFilter {
+  allocated: FloatFieldComparison
+  and: [ChannelBudgetUpdateFilter!]
+  channel: StringFieldComparison
+  id: IDFilterComparison
+  or: [ChannelBudgetUpdateFilter!]
+  spent: FloatFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+type ChannelPerformance {
+  campaigns: Int!
+  channel: String!
+  clicks: Float!
+  conversions: Float!
+  impressions: Float!
+  revenue: Float!
+  roas: Float!
+  spend: Float!
+}
+
+input CheckoutInput {
+  addressLine: String!
+  cartToken: String
+  city: String! = "Улаанбаатар"
+  customerName: String!
+  district: String!
+  email: String!
+  khoroo: String
+  notes: String
+  phone: String!
+}
+
+type CompleteCheckoutResponse {
+  invoiceId: String
+  order: Order!
+
+  """Захиалга үүссэн ч нэхэмжлэх үүсээгүй бол шалтгаан"""
+  paymentError: String
+  paymentId: Int
+  qrImage: String
+  qrText: String
+  urls: [QPayUrl!]!
+}
+
+input CreateAudienceSegmentInput {
+  description: String
+  engagement: Float
+
+  """high | medium | low"""
+  engagementLevel: String
+  growth: Float
+  ltv: Float
+  name: String!
+  size: Int
+}
+
+input CreateCampaignAssetInput {
+  campaignId: Int
+  ctr: Float
+  engagement: Float
+  impressions: Int
+  name: String!
+  size: AssetSize
+  storageKey: String
+  thumbnailUrl: String
+  type: AssetType
+  url: String!
+}
+
+input CreateCampaignInput {
+  budget: Float
+  channel: String!
+  clicks: Int
+  conversions: Int
+  description: String
+
+  """YYYY-MM-DD"""
+  endDate: String
+  impressions: Float
+  name: String!
+  revenue: Float
+  spend: Float
+
+  """YYYY-MM-DD"""
+  startDate: String
+  status: CampaignStatus
+}
+
+input CreateCategoryInput {
+  description: String
+  imageUrl: String
+  isActive: Boolean
+  name: String!
+  parentId: Int
+  position: Int
+
+  """Хоосон бол нэрээс автоматаар үүснэ"""
+  slug: String
+  translations: JSON
+}
+
+input CreateChannelBudgetInput {
+  allocated: Float!
+  channel: String!
+  spent: Float
+}
+
+input CreateManyAudienceSegmentsInput {
+  """Array of records to create"""
+  audienceSegments: [CreateAudienceSegmentInput!]!
+}
+
+input CreateManyCampaignAssetsInput {
+  """Array of records to create"""
+  campaignAssets: [CreateCampaignAssetInput!]!
+}
+
+input CreateManyCampaignsInput {
+  """Array of records to create"""
+  campaigns: [CreateCampaignInput!]!
+}
+
+input CreateManyCategoriesInput {
+  """Array of records to create"""
+  categories: [CreateCategoryInput!]!
+}
+
+input CreateManyChannelBudgetsInput {
+  """Array of records to create"""
+  channelBudgets: [CreateChannelBudgetInput!]!
+}
+
+input CreateManyProductImagesInput {
+  """Array of records to create"""
+  productImages: [CreateProductImageInput!]!
+}
+
+input CreateManyProductsInput {
+  """Array of records to create"""
+  products: [CreateProductInput!]!
+}
+
+input CreateManyVariantsInput {
+  """Array of records to create"""
+  variants: [CreateVariantInput!]!
+}
+
+input CreateOneAudienceSegmentInput {
+  """The record to create"""
+  audienceSegment: CreateAudienceSegmentInput!
+}
+
+input CreateOneCampaignAssetInput {
+  """The record to create"""
+  campaignAsset: CreateCampaignAssetInput!
+}
+
+input CreateOneCampaignInput {
+  """The record to create"""
+  campaign: CreateCampaignInput!
+}
+
+input CreateOneCategoryInput {
+  """The record to create"""
+  category: CreateCategoryInput!
+}
+
+input CreateOneChannelBudgetInput {
+  """The record to create"""
+  channelBudget: CreateChannelBudgetInput!
+}
+
+input CreateOneProductImageInput {
+  """The record to create"""
+  productImage: CreateProductImageInput!
+}
+
+input CreateOneProductInput {
+  """The record to create"""
+  product: CreateProductInput!
+}
+
+input CreateOneVariantInput {
+  """The record to create"""
+  variant: CreateVariantInput!
+}
+
+input CreateProductImageInput {
+  alt: String
+  imageUrl: String!
+  position: Int
+  productId: Int!
+}
+
+input CreateProductInput {
+  care: String
+  categoryId: Int
+  color: String
+  colorHex: String
+  compareAtPrice: Float
+  currency: String
+  description: String
+  details: String
+  dropName: String
+  fitNote: String
+  isFeatured: Boolean
+  mainImage: String
+  name: String!
+  position: Int
+  price: Float!
+
+  """Хоосон бол нэрээс автоматаар үүснэ"""
+  slug: String
+  status: ProductStatus
+  translations: JSON
+}
+
+input CreateStaffInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  mobile: String
+  password: String!
+  roles: [String!]!
+}
+
+input CreateVariantInput {
+  color: String
+  position: Int
+  price: Float
+  productId: Int!
+
+  """XS / S / M / L / XL / OS"""
+  size: String!
+  sku: String
+  stock: Int
+}
+
+type DailyRevenuePoint {
+  date: String!
+  orders: Int!
+  revenue: Float!
+}
+
+input DateFieldComparison {
+  between: DateFieldComparisonBetween
+  eq: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  is: Boolean
+  isNot: Boolean
+  lt: DateTime
+  lte: DateTime
+  neq: DateTime
+  notBetween: DateFieldComparisonBetween
+  notIn: [DateTime!]
+}
+
+input DateFieldComparisonBetween {
+  lower: DateTime!
+  upper: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DeleteManyAudienceSegmentsInput {
+  """Filter to find records to delete"""
+  filter: AudienceSegmentDeleteFilter!
+}
+
+input DeleteManyCampaignAssetsInput {
+  """Filter to find records to delete"""
+  filter: CampaignAssetDeleteFilter!
+}
+
+input DeleteManyCampaignsInput {
+  """Filter to find records to delete"""
+  filter: CampaignDeleteFilter!
+}
+
+input DeleteManyCategoriesInput {
+  """Filter to find records to delete"""
+  filter: CategoryDeleteFilter!
+}
+
+input DeleteManyChannelBudgetsInput {
+  """Filter to find records to delete"""
+  filter: ChannelBudgetDeleteFilter!
+}
+
+input DeleteManyProductImagesInput {
+  """Filter to find records to delete"""
+  filter: ProductImageDeleteFilter!
+}
+
+input DeleteManyProductsInput {
+  """Filter to find records to delete"""
+  filter: ProductDeleteFilter!
+}
+
+type DeleteManyResponse {
+  """The number of records deleted."""
+  deletedCount: Int!
+}
+
+input DeleteManyVariantsInput {
+  """Filter to find records to delete"""
+  filter: VariantDeleteFilter!
+}
+
+input DeleteOneAudienceSegmentInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteOneBudgetTransactionInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteOneCampaignAssetInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteOneCampaignInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteOneCategoryInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteOneChannelBudgetInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteOneNewsletterSubscriberInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteOneProductImageInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteOneProductInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteOneUserInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteOneVariantInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input FloatFieldComparison {
+  between: FloatFieldComparisonBetween
+  eq: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  is: Boolean
+  isNot: Boolean
+  lt: Float
+  lte: Float
+  neq: Float
+  notBetween: FloatFieldComparisonBetween
+  notIn: [Float!]
+}
+
+input FloatFieldComparisonBetween {
+  lower: Float!
+  upper: Float!
+}
+
+input IDFilterComparison {
+  eq: ID
+  gt: ID
+  gte: ID
+  iLike: ID
+  in: [ID!]
+  is: Boolean
+  isNot: Boolean
+  like: ID
+  lt: ID
+  lte: ID
+  neq: ID
+  notILike: ID
+  notIn: [ID!]
+  notLike: ID
+}
+
+input IntFieldComparison {
+  between: IntFieldComparisonBetween
+  eq: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  is: Boolean
+  isNot: Boolean
+  lt: Int
+  lte: Int
+  neq: Int
+  notBetween: IntFieldComparisonBetween
+  notIn: [Int!]
+}
+
+input IntFieldComparisonBetween {
+  lower: Int!
+  upper: Int!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type LineItem {
+  amount: Float!
+  color: String
+  id: ID!
+  imageUrl: String
+  lookId: Int
+  name: String!
+  orderId: Int!
+  productId: Int
+  productSlug: String
+  quantity: Int!
+  size: String
+  unitPrice: Float!
+  variantId: Int
+}
+
+input LineItemFilter {
+  amount: FloatFieldComparison
+  and: [LineItemFilter!]
+  id: IDFilterComparison
+  lookId: IntFieldComparison
+  or: [LineItemFilter!]
+  orderId: IntFieldComparison
+  productId: IntFieldComparison
+  quantity: IntFieldComparison
+  unitPrice: FloatFieldComparison
+  variantId: IntFieldComparison
+}
+
+input LineItemSort {
+  direction: SortDirection!
+  field: LineItemSortFields!
+  nulls: SortNulls
+}
+
+enum LineItemSortFields {
+  amount
+  id
+  lookId
+  orderId
+  productId
+  quantity
+  unitPrice
+  variantId
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Look {
+  bundleDiscountPercent: Float!
+  createdAt: DateTime!
+  id: ID!
+  imageHeight: Int
+  imageUrl: String!
+  imageWidth: Int
+  isPublished: Boolean!
+  items: [LookItem!]!
+  position: Int!
+
+  """Бараануудын үнээс автоматаар"""
+  pricing: LookPricing!
+  title: String!
+  translations: JSON
+  updatedAt: DateTime!
+}
+
+type LookItem {
+  id: ID!
+  lookId: Int!
+  position: Int!
+  product: Product
+  productId: Int!
+  x: Float!
+  y: Float!
+}
+
+input LookItemInput {
+  productId: Int!
+
+  """0..100 % (зүүнээс)"""
+  x: Float!
+
+  """0..100 % (дээрээс)"""
+  y: Float!
+}
+
+type LookPricing {
+  bundlePrice: Float!
+  discount: Float!
+  total: Float!
+}
+
+type MarketingMetrics {
+  activeROAS: Float!
+  conversionRate: Float!
+  ctr: Float!
+  liveCampaigns: Int!
+  totalCampaigns: Int!
+  totalClicks: Float!
+  totalConversions: Float!
+  totalImpressions: Float!
+  totalRevenue: Float!
+  totalSpend: Float!
+}
+
+type Mutation {
+  """Бүтэн лукийг сагсанд нэмэх (багц хямдралтай)"""
+  addLookToCart(input: AddLookToCartInput!): Order!
+
+  """Сагсанд нэмэх"""
+  addToCart(input: AddToCartInput!): Order!
+
+  """Админ самбарт нэвтрэх (admin / manager / marketer эрхтэй)"""
+  adminLogin(input: LoginInput!): AuthPayload!
+
+  """Нууц үг солих"""
+  changePassword(input: ChangePasswordInput!): Boolean!
+
+  """Захиалга үүсгэх (basket → pending)"""
+  checkout(input: CheckoutInput!): Order!
+
+  """Checkout + QPay нэхэмжлэх нэг алхамд"""
+  completeCheckout(input: CheckoutInput!): CompleteCheckoutResponse!
+  createManyAudienceSegments(input: CreateManyAudienceSegmentsInput!): [AudienceSegment!]!
+  createManyCampaignAssets(input: CreateManyCampaignAssetsInput!): [CampaignAsset!]!
+  createManyCampaigns(input: CreateManyCampaignsInput!): [Campaign!]!
+  createManyCategories(input: CreateManyCategoriesInput!): [Category!]!
+  createManyChannelBudgets(input: CreateManyChannelBudgetsInput!): [ChannelBudget!]!
+  createManyProductImages(input: CreateManyProductImagesInput!): [ProductImage!]!
+  createManyProducts(input: CreateManyProductsInput!): [Product!]!
+  createManyVariants(input: CreateManyVariantsInput!): [Variant!]!
+  createOneAudienceSegment(input: CreateOneAudienceSegmentInput!): AudienceSegment!
+  createOneCampaign(input: CreateOneCampaignInput!): Campaign!
+  createOneCampaignAsset(input: CreateOneCampaignAssetInput!): CampaignAsset!
+  createOneCategory(input: CreateOneCategoryInput!): Category!
+  createOneChannelBudget(input: CreateOneChannelBudgetInput!): ChannelBudget!
+  createOneProduct(input: CreateOneProductInput!): Product!
+  createOneProductImage(input: CreateOneProductImageInput!): ProductImage!
+  createOneVariant(input: CreateOneVariantInput!): Variant!
+
+  """Захиалгад QPay нэхэмжлэх үүсгэх"""
+  createQPayInvoice(cartToken: String, orderId: Int!): QPayInvoice!
+
+  """Ажилтан нэмэх (зөвхөн admin)"""
+  createStaff(input: CreateStaffInput!): User!
+
+  """S3-аас файл устгах (ажилтан)"""
+  deleteFile(key: String!): Boolean!
+  deleteLook(id: ID!): Boolean!
+  deleteManyAudienceSegments(input: DeleteManyAudienceSegmentsInput!): DeleteManyResponse!
+  deleteManyCampaignAssets(input: DeleteManyCampaignAssetsInput!): DeleteManyResponse!
+  deleteManyCampaigns(input: DeleteManyCampaignsInput!): DeleteManyResponse!
+  deleteManyCategories(input: DeleteManyCategoriesInput!): DeleteManyResponse!
+  deleteManyChannelBudgets(input: DeleteManyChannelBudgetsInput!): DeleteManyResponse!
+  deleteManyProductImages(input: DeleteManyProductImagesInput!): DeleteManyResponse!
+  deleteManyProducts(input: DeleteManyProductsInput!): DeleteManyResponse!
+  deleteManyVariants(input: DeleteManyVariantsInput!): DeleteManyResponse!
+  deleteOneAudienceSegment(input: DeleteOneAudienceSegmentInput!): AudienceSegmentDeleteResponse!
+  deleteOneBudgetTransaction(input: DeleteOneBudgetTransactionInput!): BudgetTransactionDeleteResponse!
+  deleteOneCampaign(input: DeleteOneCampaignInput!): CampaignDeleteResponse!
+  deleteOneCampaignAsset(input: DeleteOneCampaignAssetInput!): CampaignAssetDeleteResponse!
+  deleteOneCategory(input: DeleteOneCategoryInput!): CategoryDeleteResponse!
+  deleteOneChannelBudget(input: DeleteOneChannelBudgetInput!): ChannelBudgetDeleteResponse!
+  deleteOneNewsletterSubscriber(input: DeleteOneNewsletterSubscriberInput!): NewsletterSubscriberDeleteResponse!
+  deleteOneProduct(input: DeleteOneProductInput!): ProductDeleteResponse!
+  deleteOneProductImage(input: DeleteOneProductImageInput!): ProductImageDeleteResponse!
+  deleteOneUser(input: DeleteOneUserInput!): UserDeleteResponse!
+  deleteOneVariant(input: DeleteOneVariantInput!): VariantDeleteResponse!
+
+  """S3 presigned upload URL"""
+  getPresignedUploadUrl(input: PresignedUploadInput!): PresignedUploadResponse!
+
+  """Имэйл + нууц үгээр нэвтрэх"""
+  login(input: LoginInput!): AuthPayload!
+
+  """Нэвтэрсний дараа зочин сагсыг өөрийн сагстай нийлүүлэх"""
+  mergeCart(cartToken: String!): Order
+
+  """Зарлага бүртгэх"""
+  recordSpend(input: RecordSpendInput!): ChannelBudget!
+
+  """Access token сэргээх"""
+  refreshToken(input: RefreshTokenInput!): AuthPayload!
+
+  """Шинэ хэрэглэгч бүртгүүлэх"""
+  register(input: RegisterInput!): AuthPayload!
+
+  """Сагснаас хасах"""
+  removeFromCart(cartToken: String, lineItemId: Int!): Order!
+
+  """Дарааллыг солих"""
+  reorderLooks(ids: [Int!]!): [Look!]!
+
+  """Лук үүсгэх / засах (цэгүүдтэй нь)"""
+  saveLook(input: SaveLookInput!): Look!
+
+  """Бараа + зураг + хэмжээ/үлдэгдлийг нэг дор хадгалах (admin)"""
+  saveProduct(input: SaveProductInput!): Product!
+
+  """Newsletter бүртгүүлэх (нийтийн)"""
+  subscribeNewsletter(input: SubscribeNewsletterInput!): Boolean!
+
+  """live ↔ paused"""
+  toggleCampaignStatus(id: ID!): Campaign!
+
+  """Төсөв цэнэглэх (Add funds)"""
+  topUpBudget(input: TopUpBudgetInput!): BudgetSettings!
+
+  """Newsletter-ээс гарах"""
+  unsubscribeNewsletter(email: String!): Boolean!
+
+  """Нийт / өдрийн төсөв"""
+  updateBudgetSettings(input: UpdateBudgetSettingsInput!): BudgetSettings!
+
+  """Сагсны барааны тоо өөрчлөх"""
+  updateCartItem(input: UpdateCartItemInput!): Order!
+  updateManyAudienceSegments(input: UpdateManyAudienceSegmentsInput!): UpdateManyResponse!
+  updateManyCampaignAssets(input: UpdateManyCampaignAssetsInput!): UpdateManyResponse!
+  updateManyCampaigns(input: UpdateManyCampaignsInput!): UpdateManyResponse!
+  updateManyCategories(input: UpdateManyCategoriesInput!): UpdateManyResponse!
+  updateManyChannelBudgets(input: UpdateManyChannelBudgetsInput!): UpdateManyResponse!
+  updateManyProductImages(input: UpdateManyProductImagesInput!): UpdateManyResponse!
+  updateManyProducts(input: UpdateManyProductsInput!): UpdateManyResponse!
+  updateManyVariants(input: UpdateManyVariantsInput!): UpdateManyResponse!
+  updateOneAudienceSegment(input: UpdateOneAudienceSegmentInput!): AudienceSegment!
+  updateOneCampaign(input: UpdateOneCampaignInput!): Campaign!
+  updateOneCampaignAsset(input: UpdateOneCampaignAssetInput!): CampaignAsset!
+  updateOneCategory(input: UpdateOneCategoryInput!): Category!
+  updateOneChannelBudget(input: UpdateOneChannelBudgetInput!): ChannelBudget!
+  updateOneProduct(input: UpdateOneProductInput!): Product!
+  updateOneProductImage(input: UpdateOneProductImageInput!): ProductImage!
+  updateOneUser(input: UpdateOneUserInput!): User!
+  updateOneVariant(input: UpdateOneVariantInput!): Variant!
+
+  """Захиалгын статус солих (админ)"""
+  updateOrderStatus(input: UpdateOrderStatusInput!): Order!
+
+  """Профайл засах"""
+  updateProfile(input: UpdateProfileInput!): User!
+
+  """Нэг хэсгийн контент шинэчлэх"""
+  updateSiteContent(data: JSON!, key: String!): JSON!
+}
+
+type NewsletterSubscriber {
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  isActive: Boolean!
+  locale: String!
+  source: String
+  unsubscribedAt: DateTime
+  updatedAt: DateTime!
+}
+
+type NewsletterSubscriberConnection {
+  """Array of nodes."""
+  nodes: [NewsletterSubscriber!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type NewsletterSubscriberDeleteResponse {
+  createdAt: DateTime
+  email: String
+  id: ID
+  isActive: Boolean
+  locale: String
+  source: String
+  unsubscribedAt: DateTime
+  updatedAt: DateTime
+}
+
+input NewsletterSubscriberFilter {
+  and: [NewsletterSubscriberFilter!]
+  createdAt: DateFieldComparison
+  email: StringFieldComparison
+  id: IDFilterComparison
+  isActive: BooleanFieldComparison
+  locale: StringFieldComparison
+  or: [NewsletterSubscriberFilter!]
+  source: StringFieldComparison
+  unsubscribedAt: DateFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+input NewsletterSubscriberSort {
+  direction: SortDirection!
+  field: NewsletterSubscriberSortFields!
+  nulls: SortNulls
+}
+
+enum NewsletterSubscriberSortFields {
+  createdAt
+  email
+  id
+  isActive
+  locale
+  source
+  unsubscribedAt
+  updatedAt
+}
+
+type OffsetPageInfo {
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+}
+
+input OffsetPaging {
+  """Limit the number of records returned"""
+  limit: Int
+
+  """Offset to start returning records from"""
+  offset: Int
+}
+
+type Order {
+  addressLine: String
+  cartToken: String
+  city: String
+  createdAt: DateTime!
+  currency: String!
+  customerName: String
+  data: JSON
+  deliveryFee: Float!
+  discountTotal: Float!
+  district: String
+  email: String
+  id: ID!
+  itemTotal: Float!
+  khoroo: String
+  lineItems(
+    """Specify to filter the records returned."""
+    filter: LineItemFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [LineItemSort!]! = []
+  ): [LineItem!]!
+  notes: String
+  number: String!
+  paidAt: DateTime
+  paymentState: PaymentState!
+  phone: String
+  placedAt: DateTime
+  status: OrderStatus!
+  total: Float!
+  updatedAt: DateTime!
+  userId: String
+}
+
+type OrderConnection {
+  """Array of nodes."""
+  nodes: [Order!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+input OrderFilter {
+  and: [OrderFilter!]
+  city: StringFieldComparison
+  createdAt: DateFieldComparison
+  currency: StringFieldComparison
+  customerName: StringFieldComparison
+  deliveryFee: FloatFieldComparison
+  discountTotal: FloatFieldComparison
+  district: StringFieldComparison
+  email: StringFieldComparison
+  id: IDFilterComparison
+  itemTotal: FloatFieldComparison
+  number: StringFieldComparison
+  or: [OrderFilter!]
+  paidAt: DateFieldComparison
+  paymentState: PaymentStateFilterComparison
+  phone: StringFieldComparison
+  placedAt: DateFieldComparison
+  status: OrderStatusFilterComparison
+  total: FloatFieldComparison
+  updatedAt: DateFieldComparison
+  userId: StringFieldComparison
+}
+
+input OrderSort {
+  direction: SortDirection!
+  field: OrderSortFields!
+  nulls: SortNulls
+}
+
+enum OrderSortFields {
+  city
+  createdAt
+  currency
+  customerName
+  deliveryFee
+  discountTotal
+  district
+  email
+  id
+  itemTotal
+  number
+  paidAt
+  paymentState
+  phone
+  placedAt
+  status
+  total
+  updatedAt
+  userId
+}
+
+enum OrderStatus {
+  BASKET
+  CANCELLED
+  CONFIRMED
+  DELIVERED
+  PENDING
+  PROCESSING
+  SHIPPED
+}
+
+input OrderStatusFilterComparison {
+  eq: OrderStatus
+  gt: OrderStatus
+  gte: OrderStatus
+  iLike: OrderStatus
+  in: [OrderStatus!]
+  is: Boolean
+  isNot: Boolean
+  like: OrderStatus
+  lt: OrderStatus
+  lte: OrderStatus
+  neq: OrderStatus
+  notILike: OrderStatus
+  notIn: [OrderStatus!]
+  notLike: OrderStatus
+}
+
+type Payment {
+  amount: Float!
+  createdAt: DateTime!
+  data: JSON
+  id: ID!
+  paidAt: DateTime
+  provider: String!
+  sourceId: Int!
+  sourceType: String!
+  status: PaymentStatus!
+  transactionId: String
+  updatedAt: DateTime!
+}
+
+type PaymentConnection {
+  """Array of nodes."""
+  nodes: [Payment!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+input PaymentFilter {
+  amount: FloatFieldComparison
+  and: [PaymentFilter!]
+  createdAt: DateFieldComparison
+  id: IDFilterComparison
+  or: [PaymentFilter!]
+  paidAt: DateFieldComparison
+  provider: StringFieldComparison
+  sourceId: IntFieldComparison
+  sourceType: StringFieldComparison
+  status: PaymentStatusFilterComparison
+  transactionId: StringFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+input PaymentSort {
+  direction: SortDirection!
+  field: PaymentSortFields!
+  nulls: SortNulls
+}
+
+enum PaymentSortFields {
+  amount
+  createdAt
+  id
+  paidAt
+  provider
+  sourceId
+  sourceType
+  status
+  transactionId
+  updatedAt
+}
+
+enum PaymentState {
+  PAID
+  REFUNDED
+  UNPAID
+}
+
+input PaymentStateFilterComparison {
+  eq: PaymentState
+  gt: PaymentState
+  gte: PaymentState
+  iLike: PaymentState
+  in: [PaymentState!]
+  is: Boolean
+  isNot: Boolean
+  like: PaymentState
+  lt: PaymentState
+  lte: PaymentState
+  neq: PaymentState
+  notILike: PaymentState
+  notIn: [PaymentState!]
+  notLike: PaymentState
+}
+
+enum PaymentStatus {
+  COMPLETED
+  PENDING
+  REFUNDED
+  REJECTED
+}
+
+input PaymentStatusFilterComparison {
+  eq: PaymentStatus
+  gt: PaymentStatus
+  gte: PaymentStatus
+  iLike: PaymentStatus
+  in: [PaymentStatus!]
+  is: Boolean
+  isNot: Boolean
+  like: PaymentStatus
+  lt: PaymentStatus
+  lte: PaymentStatus
+  neq: PaymentStatus
+  notILike: PaymentStatus
+  notIn: [PaymentStatus!]
+  notLike: PaymentStatus
+}
+
+input PresignedUploadInput {
+  filename: String!
+  folder: String = "uploads"
+
+  """image/jpeg, image/png, image/webp, video/mp4 ..."""
+  mimeType: String!
+}
+
+type PresignedUploadResponse {
+  key: String!
+  publicUrl: String!
+  uploadUrl: String!
+}
+
+type Product {
+  care: String
+  category: Category
+  categoryId: Int
+  color: String
+  colorHex: String
+  compareAtPrice: Float
+  createdAt: DateTime!
+  currency: String!
+  description: String
+  details: String
+  dropName: String
+  fitNote: String
+  id: ID!
+  images(
+    """Specify to filter the records returned."""
+    filter: ProductImageFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [ProductImageSort!]! = [{direction: ASC, field: position}]
+  ): [ProductImage!]!
+  isFeatured: Boolean!
+  mainImage: String
+  name: String!
+  position: Int!
+  price: Float!
+  slug: String!
+  status: ProductStatus!
+  translations: JSON
+  updatedAt: DateTime!
+  variants(
+    """Specify to filter the records returned."""
+    filter: VariantFilter! = {}
+
+    """Specify to sort results."""
+    sorting: [VariantSort!]! = [{direction: ASC, field: position}]
+  ): [Variant!]!
+}
+
+type ProductConnection {
+  """Array of nodes."""
+  nodes: [Product!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+input ProductDeleteFilter {
+  and: [ProductDeleteFilter!]
+  categoryId: IntFieldComparison
+  color: StringFieldComparison
+  compareAtPrice: FloatFieldComparison
+  createdAt: DateFieldComparison
+  currency: StringFieldComparison
+  dropName: StringFieldComparison
+  id: IDFilterComparison
+  isFeatured: BooleanFieldComparison
+  name: StringFieldComparison
+  or: [ProductDeleteFilter!]
+  position: IntFieldComparison
+  price: FloatFieldComparison
+  slug: StringFieldComparison
+  status: ProductStatusFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+type ProductDeleteResponse {
+  care: String
+  categoryId: Int
+  color: String
+  colorHex: String
+  compareAtPrice: Float
+  createdAt: DateTime
+  currency: String
+  description: String
+  details: String
+  dropName: String
+  fitNote: String
+  id: ID
+  isFeatured: Boolean
+  mainImage: String
+  name: String
+  position: Int
+  price: Float
+  slug: String
+  status: ProductStatus
+  translations: JSON
+  updatedAt: DateTime
+}
+
+input ProductFilter {
+  and: [ProductFilter!]
+  categoryId: IntFieldComparison
+  color: StringFieldComparison
+  compareAtPrice: FloatFieldComparison
+  createdAt: DateFieldComparison
+  currency: StringFieldComparison
+  dropName: StringFieldComparison
+  id: IDFilterComparison
+  isFeatured: BooleanFieldComparison
+  name: StringFieldComparison
+  or: [ProductFilter!]
+  position: IntFieldComparison
+  price: FloatFieldComparison
+  slug: StringFieldComparison
+  status: ProductStatusFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+type ProductImage {
+  alt: String
+  id: ID!
+  imageUrl: String!
+  position: Int!
+  product: Product!
+  productId: Int!
+}
+
+type ProductImageConnection {
+  """Array of nodes."""
+  nodes: [ProductImage!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+input ProductImageDeleteFilter {
+  and: [ProductImageDeleteFilter!]
+  id: IDFilterComparison
+  or: [ProductImageDeleteFilter!]
+  position: IntFieldComparison
+  productId: IntFieldComparison
+}
+
+type ProductImageDeleteResponse {
+  alt: String
+  id: ID
+  imageUrl: String
+  position: Int
+  productId: Int
+}
+
+input ProductImageFilter {
+  and: [ProductImageFilter!]
+  id: IDFilterComparison
+  or: [ProductImageFilter!]
+  position: IntFieldComparison
+  productId: IntFieldComparison
+}
+
+input ProductImageSort {
+  direction: SortDirection!
+  field: ProductImageSortFields!
+  nulls: SortNulls
+}
+
+enum ProductImageSortFields {
+  id
+  position
+  productId
+}
+
+input ProductImageUpdateFilter {
+  and: [ProductImageUpdateFilter!]
+  id: IDFilterComparison
+  or: [ProductImageUpdateFilter!]
+  position: IntFieldComparison
+  productId: IntFieldComparison
+}
+
+input ProductSort {
+  direction: SortDirection!
+  field: ProductSortFields!
+  nulls: SortNulls
+}
+
+enum ProductSortFields {
+  categoryId
+  color
+  compareAtPrice
+  createdAt
+  currency
+  dropName
+  id
+  isFeatured
+  name
+  position
+  price
+  slug
+  status
+  updatedAt
+}
+
+enum ProductStatus {
+  ACTIVE
+  ARCHIVED
+  DRAFT
+}
+
+input ProductStatusFilterComparison {
+  eq: ProductStatus
+  gt: ProductStatus
+  gte: ProductStatus
+  iLike: ProductStatus
+  in: [ProductStatus!]
+  is: Boolean
+  isNot: Boolean
+  like: ProductStatus
+  lt: ProductStatus
+  lte: ProductStatus
+  neq: ProductStatus
+  notILike: ProductStatus
+  notIn: [ProductStatus!]
+  notLike: ProductStatus
+}
+
+input ProductUpdateFilter {
+  and: [ProductUpdateFilter!]
+  categoryId: IntFieldComparison
+  color: StringFieldComparison
+  compareAtPrice: FloatFieldComparison
+  createdAt: DateFieldComparison
+  currency: StringFieldComparison
+  dropName: StringFieldComparison
+  id: IDFilterComparison
+  isFeatured: BooleanFieldComparison
+  name: StringFieldComparison
+  or: [ProductUpdateFilter!]
+  position: IntFieldComparison
+  price: FloatFieldComparison
+  slug: StringFieldComparison
+  status: ProductStatusFilterComparison
+  updatedAt: DateFieldComparison
+}
+
+type QPayInvoice {
+  invoiceId: String!
+  paymentId: Int!
+  qrImage: String!
+  qrText: String!
+  urls: [QPayUrl!]!
+}
+
+type QPayPaymentStatus {
+  orderId: Int!
+  paid: Boolean!
+}
+
+type QPayUrl {
+  description: String!
+  link: String!
+  logo: String!
+  name: String!
+}
+
+type Query {
+  audienceSegment(
+    """The id of the record to find."""
+    id: ID!
+  ): AudienceSegment!
+  audienceSegments(
+    """Specify to filter the records returned."""
+    filter: AudienceSegmentFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [AudienceSegmentSort!]! = []
+  ): AudienceSegmentConnection!
+
+  """Төсвийн тойм"""
+  budgetOverview: BudgetOverview!
+  budgetTransaction(
+    """The id of the record to find."""
+    id: ID!
+  ): BudgetTransaction!
+  budgetTransactions(
+    """Specify to filter the records returned."""
+    filter: BudgetTransactionFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [BudgetTransactionSort!]! = []
+  ): BudgetTransactionConnection!
+  campaign(
+    """The id of the record to find."""
+    id: ID!
+  ): Campaign!
+  campaignAsset(
+    """The id of the record to find."""
+    id: ID!
+  ): CampaignAsset!
+  campaignAssets(
+    """Specify to filter the records returned."""
+    filter: CampaignAssetFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [CampaignAssetSort!]! = []
+  ): CampaignAssetConnection!
+  campaigns(
+    """Specify to filter the records returned."""
+    filter: CampaignFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [CampaignSort!]! = []
+  ): CampaignConnection!
+
+  """Одоогийн сагс"""
+  cart(cartToken: String): Order
+  categories(
+    """Specify to filter the records returned."""
+    filter: CategoryFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [CategorySort!]! = []
+  ): CategoryConnection!
+  category(
+    """The id of the record to find."""
+    id: ID!
+  ): Category!
+  channelBudget(
+    """The id of the record to find."""
+    id: ID!
+  ): ChannelBudget!
+  channelBudgets(
+    """Specify to filter the records returned."""
+    filter: ChannelBudgetFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [ChannelBudgetSort!]! = []
+  ): ChannelBudgetConnection!
+
+  """Сувгаар задаргаа"""
+  channelPerformance: [ChannelPerformance!]!
+
+  """QPay төлөлт шалгах"""
+  checkQPayPayment(invoiceId: String!): QPayPaymentStatus!
+
+  """Өдрөөр орлого"""
+  dailyRevenue(days: Int! = 30): [DailyRevenuePoint!]!
+  health: String!
+  look(id: ID!): Look!
+
+  """Admin: бүх лук"""
+  looks: [Look!]!
+
+  """Pulse — гол үзүүлэлт"""
+  marketingMetrics: MarketingMetrics!
+
+  """Нэвтэрсэн хэрэглэгч"""
+  me: User!
+
+  """Миний захиалгууд"""
+  myOrders: [Order!]!
+  newsletterSubscriber(
+    """The id of the record to find."""
+    id: ID!
+  ): NewsletterSubscriber!
+  newsletterSubscribers(
+    """Specify to filter the records returned."""
+    filter: NewsletterSubscriberFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [NewsletterSubscriberSort!]! = []
+  ): NewsletterSubscriberConnection!
+  order(
+    """The id of the record to find."""
+    id: ID!
+  ): Order!
+  orders(
+    """Specify to filter the records returned."""
+    filter: OrderFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [OrderSort!]! = []
+  ): OrderConnection!
+  payment(
+    """The id of the record to find."""
+    id: ID!
+  ): Payment!
+  payments(
+    """Specify to filter the records returned."""
+    filter: PaymentFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [PaymentSort!]! = []
+  ): PaymentConnection!
+  product(
+    """The id of the record to find."""
+    id: ID!
+  ): Product!
+  productImage(
+    """The id of the record to find."""
+    id: ID!
+  ): ProductImage!
+  productImages(
+    """Specify to filter the records returned."""
+    filter: ProductImageFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [ProductImageSort!]! = []
+  ): ProductImageConnection!
+  products(
+    """Specify to filter the records returned."""
+    filter: ProductFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [ProductSort!]! = []
+  ): ProductConnection!
+
+  """Сайтын контент (hero, ticker, campaign, community, newsletter)"""
+  siteContent: JSON!
+
+  """Идэвхтэй ангиллууд"""
+  storeCategories: [Category!]!
+
+  """Дэлгүүр: нийтлэгдсэн Shop the Look"""
+  storeLooks: [Look!]!
+
+  """Дэлгүүрийн борлуулалт"""
+  storeOverview: StoreOverview!
+
+  """Slug-аар бараа (барааны хуудас)"""
+  storeProduct(slug: String!): Product!
+
+  """Дэлгүүрийн бараанууд"""
+  storeProducts(filter: StoreProductsFilter): StoreProductList!
+
+  """Complete the look"""
+  storeRelatedProducts(limit: Int = 4, productId: Int!): [Product!]!
+
+  """Захиалга шалгах (дугаар + имэйл)"""
+  trackOrder(input: TrackOrderInput!): Order!
+  user(
+    """The id of the record to find."""
+    id: ID!
+  ): User!
+  users(
+    """Specify to filter the records returned."""
+    filter: UserFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [UserSort!]! = []
+  ): UserConnection!
+  variant(
+    """The id of the record to find."""
+    id: ID!
+  ): Variant!
+  variants(
+    """Specify to filter the records returned."""
+    filter: VariantFilter! = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging! = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [VariantSort!]! = []
+  ): VariantConnection!
+}
+
+input RecordSpendInput {
+  amount: Float!
+  campaignId: Int
+  channel: String!
+  description: String
+}
+
+input RefreshTokenInput {
+  refreshToken: String!
+}
+
+input RegisterInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  mobile: String
+  password: String!
+}
+
+input SaveLookInput {
+  bundleDiscountPercent: Float = 0
+  id: Int
+  imageHeight: Int
+  imageUrl: String!
+  imageWidth: Int
+  isPublished: Boolean = false
+  items: [LookItemInput!]!
+  title: String!
+  translations: JSON
+}
+
+input SaveProductImageInput {
+  alt: String
+  imageUrl: String!
+}
+
+input SaveProductInput {
+  care: String
+  categoryId: Int
+  color: String
+  colorHex: String
+  compareAtPrice: Float
+  currency: String
+  description: String
+  details: String
+  dropName: String
+  fitNote: String
+
+  """Хоосон бол шинээр үүсгэнэ"""
+  id: Int
+
+  """Дарааллаараа хадгална; эхнийх нь mainImage болно"""
+  images: [SaveProductImageInput!]
+  isFeatured: Boolean
+  mainImage: String
+  name: String!
+  position: Int
+  price: Float!
+
+  """Хоосон бол нэрээс автоматаар үүснэ"""
+  slug: String
+  status: ProductStatus
+  translations: JSON
+
+  """Жагсаалтад байхгүй variant устгагдана"""
+  variants: [SaveVariantInput!]
+}
+
+input SaveVariantInput {
+  color: String
+
+  """Байгаа variant бол id"""
+  id: Int
+  price: Float
+  size: String!
+  sku: String
+  stock: Int!
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+type StoreOverview {
+  activeProducts: Int!
+  averageOrderValue: Float!
+  customers: Int!
+  lowStockVariants: Int!
+  newsletterSubscribers: Int!
+  ordersToday: Int!
+  paidOrders: Int!
+  pendingOrders: Int!
+  revenue: Float!
+  revenueToday: Float!
+  totalOrders: Int!
+}
+
+type StoreProductList {
+  items: [Product!]!
+  total: Int!
+}
+
+input StoreProductsFilter {
+  """Ангиллын slug"""
+  categorySlug: String
+  dropName: String
+  featured: Boolean
+  limit: Int = 24
+  offset: Int = 0
+
+  """Нэрээр хайх"""
+  search: String
+}
+
+input StringFieldComparison {
+  eq: String
+  gt: String
+  gte: String
+  iLike: String
+  in: [String!]
+  is: Boolean
+  isNot: Boolean
+  like: String
+  lt: String
+  lte: String
+  neq: String
+  notILike: String
+  notIn: [String!]
+  notLike: String
+}
+
+input SubscribeNewsletterInput {
+  email: String!
+  locale: String = "mn"
+
+  """footer / popup / checkout ..."""
+  source: String
+}
+
+input TopUpBudgetInput {
+  amount: Float!
+  description: String
+}
+
+input TrackOrderInput {
+  email: String!
+  number: String!
+}
+
+input UpdateAudienceSegmentInput {
+  description: String
+  engagement: Float
+
+  """high | medium | low"""
+  engagementLevel: String
+  growth: Float
+  ltv: Float
+  name: String
+  size: Int
+}
+
+input UpdateBudgetSettingsInput {
+  dailyBudget: Float!
+  totalBudget: Float!
+}
+
+input UpdateCampaignAssetInput {
+  campaignId: Int
+  ctr: Float
+  engagement: Float
+  impressions: Int
+  name: String
+  size: AssetSize
+  storageKey: String
+  thumbnailUrl: String
+  type: AssetType
+  url: String
+}
+
+input UpdateCampaignInput {
+  budget: Float
+  channel: String
+  clicks: Int
+  conversions: Int
+  description: String
+
+  """YYYY-MM-DD"""
+  endDate: String
+  impressions: Float
+  name: String
+  revenue: Float
+  spend: Float
+
+  """YYYY-MM-DD"""
+  startDate: String
+  status: CampaignStatus
+}
+
+input UpdateCartItemInput {
+  cartToken: String
+  lineItemId: Int!
+  quantity: Int!
+}
+
+input UpdateCategoryInput {
+  description: String
+  imageUrl: String
+  isActive: Boolean
+  name: String
+  parentId: Int
+  position: Int
+
+  """Хоосон бол нэрээс автоматаар үүснэ"""
+  slug: String
+  translations: JSON
+}
+
+input UpdateChannelBudgetInput {
+  allocated: Float
+  channel: String
+  spent: Float
+}
+
+input UpdateManyAudienceSegmentsInput {
+  """Filter used to find fields to update"""
+  filter: AudienceSegmentUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateAudienceSegmentInput!
+}
+
+input UpdateManyCampaignAssetsInput {
+  """Filter used to find fields to update"""
+  filter: CampaignAssetUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateCampaignAssetInput!
+}
+
+input UpdateManyCampaignsInput {
+  """Filter used to find fields to update"""
+  filter: CampaignUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateCampaignInput!
+}
+
+input UpdateManyCategoriesInput {
+  """Filter used to find fields to update"""
+  filter: CategoryUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateCategoryInput!
+}
+
+input UpdateManyChannelBudgetsInput {
+  """Filter used to find fields to update"""
+  filter: ChannelBudgetUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateChannelBudgetInput!
+}
+
+input UpdateManyProductImagesInput {
+  """Filter used to find fields to update"""
+  filter: ProductImageUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateProductImageInput!
+}
+
+input UpdateManyProductsInput {
+  """Filter used to find fields to update"""
+  filter: ProductUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateProductInput!
+}
+
+type UpdateManyResponse {
+  """The number of records updated."""
+  updatedCount: Int!
+}
+
+input UpdateManyVariantsInput {
+  """Filter used to find fields to update"""
+  filter: VariantUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateVariantInput!
+}
+
+input UpdateOneAudienceSegmentInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateAudienceSegmentInput!
+}
+
+input UpdateOneCampaignAssetInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateCampaignAssetInput!
+}
+
+input UpdateOneCampaignInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateCampaignInput!
+}
+
+input UpdateOneCategoryInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateCategoryInput!
+}
+
+input UpdateOneChannelBudgetInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateChannelBudgetInput!
+}
+
+input UpdateOneProductImageInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateProductImageInput!
+}
+
+input UpdateOneProductInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateProductInput!
+}
+
+input UpdateOneUserInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateUserInput!
+}
+
+input UpdateOneVariantInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateVariantInput!
+}
+
+input UpdateOrderStatusInput {
+  id: Int!
+  status: OrderStatus!
+}
+
+input UpdateProductImageInput {
+  alt: String
+  imageUrl: String
+  position: Int
+  productId: Int
+}
+
+input UpdateProductInput {
+  care: String
+  categoryId: Int
+  color: String
+  colorHex: String
+  compareAtPrice: Float
+  currency: String
+  description: String
+  details: String
+  dropName: String
+  fitNote: String
+  isFeatured: Boolean
+  mainImage: String
+  name: String
+  position: Int
+  price: Float
+
+  """Хоосон бол нэрээс автоматаар үүснэ"""
+  slug: String
+  status: ProductStatus
+  translations: JSON
+}
+
+input UpdateProfileInput {
+  avatarUrl: String
+  firstName: String
+  lastName: String
+  mobile: String
+}
+
+input UpdateUserInput {
+  firstName: String
+  isActive: Boolean
+  lastName: String
+  mobile: String
+  roles: [String!]
+}
+
+input UpdateVariantInput {
+  color: String
+  position: Int
+  price: Float
+  productId: Int
+
+  """XS / S / M / L / XL / OS"""
+  size: String
+  sku: String
+  stock: Int
+}
+
+type User {
+  avatarUrl: String
+  createdAt: DateTime!
+  email: String
+  firstName: String!
+  id: ID!
+  isActive: Boolean!
+  lastLoginAt: DateTime
+  lastName: String!
+  mobile: String
+  roles: [String!]!
+  updatedAt: DateTime!
+}
+
+type UserConnection {
+  """Array of nodes."""
+  nodes: [User!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type UserDeleteResponse {
+  avatarUrl: String
+  createdAt: DateTime
+  email: String
+  firstName: String
+  id: ID
+  isActive: Boolean
+  lastLoginAt: DateTime
+  lastName: String
+  mobile: String
+  roles: [String!]
+  updatedAt: DateTime
+}
+
+input UserFilter {
+  and: [UserFilter!]
+  createdAt: DateFieldComparison
+  email: StringFieldComparison
+  firstName: StringFieldComparison
+  id: IDFilterComparison
+  isActive: BooleanFieldComparison
+  lastLoginAt: DateFieldComparison
+  lastName: StringFieldComparison
+  mobile: StringFieldComparison
+  or: [UserFilter!]
+  updatedAt: DateFieldComparison
+}
+
+input UserSort {
+  direction: SortDirection!
+  field: UserSortFields!
+  nulls: SortNulls
+}
+
+enum UserSortFields {
+  createdAt
+  email
+  firstName
+  id
+  isActive
+  lastLoginAt
+  lastName
+  mobile
+  updatedAt
+}
+
+type Variant {
+  color: String!
+  createdAt: DateTime!
+  id: ID!
+  position: Int!
+  price: Float
+  product: Product!
+  productId: Int!
+  size: String!
+  sku: String
+  stock: Int!
+  updatedAt: DateTime!
+}
+
+type VariantConnection {
+  """Array of nodes."""
+  nodes: [Variant!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+input VariantDeleteFilter {
+  and: [VariantDeleteFilter!]
+  color: StringFieldComparison
+  createdAt: DateFieldComparison
+  id: IDFilterComparison
+  or: [VariantDeleteFilter!]
+  position: IntFieldComparison
+  price: FloatFieldComparison
+  productId: IntFieldComparison
+  size: StringFieldComparison
+  sku: StringFieldComparison
+  stock: IntFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+type VariantDeleteResponse {
+  color: String
+  createdAt: DateTime
+  id: ID
+  position: Int
+  price: Float
+  productId: Int
+  size: String
+  sku: String
+  stock: Int
+  updatedAt: DateTime
+}
+
+input VariantFilter {
+  and: [VariantFilter!]
+  color: StringFieldComparison
+  createdAt: DateFieldComparison
+  id: IDFilterComparison
+  or: [VariantFilter!]
+  position: IntFieldComparison
+  price: FloatFieldComparison
+  productId: IntFieldComparison
+  size: StringFieldComparison
+  sku: StringFieldComparison
+  stock: IntFieldComparison
+  updatedAt: DateFieldComparison
+}
+
+input VariantSort {
+  direction: SortDirection!
+  field: VariantSortFields!
+  nulls: SortNulls
+}
+
+enum VariantSortFields {
+  color
+  createdAt
+  id
+  position
+  price
+  productId
+  size
+  sku
+  stock
+  updatedAt
+}
+
+input VariantUpdateFilter {
+  and: [VariantUpdateFilter!]
+  color: StringFieldComparison
+  createdAt: DateFieldComparison
+  id: IDFilterComparison
+  or: [VariantUpdateFilter!]
+  position: IntFieldComparison
+  price: FloatFieldComparison
+  productId: IntFieldComparison
+  size: StringFieldComparison
+  sku: StringFieldComparison
+  stock: IntFieldComparison
+  updatedAt: DateFieldComparison
+}

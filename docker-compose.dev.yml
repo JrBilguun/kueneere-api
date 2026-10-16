@@ -1,0 +1,50 @@
+# =============================================================
+# Хөгжүүлэлтийн орчин — зөвхөн MySQL (+ adminer) Docker-т,
+# API нь локалаар `npm run start:dev` (hot reload) ажиллана.
+#
+#   docker compose -f docker-compose.dev.yml up -d
+#   docker compose -f docker-compose.dev.yml down        # зогсоох
+#   docker compose -f docker-compose.dev.yml down -v     # DB-г бүр устгах
+#
+# Нууц үгс нь .env.development-тэй таарна (kueneere / kueneere, root / root)
+# =============================================================
+name: kueneere-dev
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: kueneere-mysql-dev
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kueneere_db
+      MYSQL_USER: kueneere
+      MYSQL_PASSWORD: kueneere
+      TZ: UTC
+    ports:
+      # Компьютер дээрээ MySQL аль хэдийн ажиллаж байвал "3307:3306" болгоод
+      # .env.development-ийн DB_PORT=3307 болгоно
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - mysql_dev_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -proot --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  adminer:
+    image: adminer:4
+    container_name: kueneere-adminer-dev
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_dev_data:

@@ -1,0 +1,76 @@
+# =============================================================
+# KUENEERE API — бүтэн stack (API + MySQL)
+#
+#   cp .env.example .env.production   # утгуудаа засна
+#   docker compose --env-file .env.production up -d --build
+#   docker compose --env-file .env.production exec api node dist/database/seeds/run-seed.js
+#
+# (эсвэл Makefile: make up / make seed / make logs)
+# =============================================================
+name: kueneere
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kueneere-api:latest
+    container_name: kueneere-api
+    env_file:
+      - .env.production
+    environment:
+      # Контейнер доторх сүлжээнд MySQL-ийн хаяг нь service-ийн нэр
+      DB_HOST: mysql
+      DB_PORT: 3306
+      NODE_ENV: production
+    ports:
+      - "${API_PORT:-3003}:3003"
+    volumes:
+      # admin-аас оруулсан барааны зургууд (S3 ашиглаагүй үед)
+      - uploads_data:/app/uploads
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: kueneere-mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?DB_ROOT_PASSWORD .env.production-д заавал}
+      MYSQL_DATABASE: ${DB_DATABASE:-kueneere_db}
+      MYSQL_USER: ${DB_USERNAME:-kueneere}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD .env.production-д заавал}
+      TZ: UTC
+    # Зөвхөн энэ компьютероос холбогдоно (DBeaver/TablePlus). Интернэтэд нээхгүй.
+    ports:
+      - "127.0.0.1:${DB_EXPOSE_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+
+  # Хүсвэл: вэбээр DB харах (http://localhost:8080)
+  #   docker compose --env-file .env.production --profile tools up -d adminer
+  adminer:
+    image: adminer:4
+    container_name: kueneere-adminer
+    profiles: ["tools"]
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
+  uploads_data:
